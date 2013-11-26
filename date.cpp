@@ -6,11 +6,11 @@ namespace lab2{
 //Default contructor
 Date::Date(){
 	// För att få nuvarande tid
-   time_t tp;
-   time(&tp);    
+   time_t tp;							//Kommentera denna för kattis
+   time(&tp); 							//Kommentera denna för kattis
    set_k_time(tp);
 
-   //k_time(&tp);
+   //k_time(&tp); 						//Avkommentera denna för kattis
 
    // För att få ut datum lokalt 
    struct tm* t = gmtime(&tp);
