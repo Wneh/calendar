@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdexcept> 
+#include <cmath>
 
 namespace lab2{
 

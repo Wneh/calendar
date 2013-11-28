@@ -34,7 +34,7 @@ int main(){
 
 	Gregorian g4 = Gregorian(2013,11,13);
 	//std::string temp = g4.week_day_name();
-	//std::cout << g4.week_day_name() << std::endl;
+	std::cout << g4.week_day_name() << std::endl;
 	assert(g4.week_day_name() == "wednesday");
 	assert(g3.week_day_name() == "tuesday");
 
@@ -82,6 +82,7 @@ int main(){
 
 	std::cout << g5 << std::endl;
 	std::cout << g6 << std::endl;
+	std::cout << g5.mod_julian_day() << " " <<g6.mod_julian_day() << std::endl;
 	std::cout << std::endl;
 
 	assert((g5 - g6) == 4);

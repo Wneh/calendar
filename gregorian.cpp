@@ -3,10 +3,10 @@
 namespace lab2{
 
 const int day_number_array[32] = {0,1,2,3,4,5,6,7,1,2,3,4,5,6,7,1,2,3,4,5,6,7,1,2,3,4,5,6,7,1,2,3};
-const std::string day_name_array[7] = {"sunday","monday","tuesday","wednesday","thursday","friday","saturday"};
+const std::string day_name_array[8] = {"sunday","monday","tuesday","wednesday","thursday","friday","saturday","sunday"};
 const std::string month_name_array[13] = {"","january","february","march","april","may","june","july","august","september","october","november","december"};
 const int months_length_array[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
-const int cent_nummer_array[5] = {0,4,2,0,6};
+const int cent_nummer_array[4] = {6,4,2,0};
 
 Gregorian::Gregorian():Date(){}
 
@@ -39,14 +39,14 @@ Date& Gregorian::operator--(){
 //Gregorian++
 Gregorian Gregorian::operator++(int unused){
 	Gregorian result = *this;
-	add_day();
+	result.add_day();
 	return result;
 }
 
 //Gregorian--
 Gregorian Gregorian::operator--(int unused){
 	Gregorian result = *this;
-	remove_day();
+	result.remove_day();
 	return result;
 }
 
@@ -60,27 +60,8 @@ Date& Gregorian::operator-=(const int& n){
 	return *this;
 }
 
-int Gregorian::operator-(const Date& rhs) const{
-
-	Gregorian lowest;
-	Gregorian highest(*this);
-
-	if((*this) < rhs){
-		lowest = Gregorian(year(),month(),day());
-		highest = rhs;
-	} else {
-		lowest = Gregorian(rhs.year(),rhs.month(),rhs.day());
-		highest = (*this); 
-	}
-
-	int dayDiff = 0;
-
-	while(lowest != highest){
-		++lowest;
-		++dayDiff;
-	}
-
-	return dayDiff;
+int Gregorian::operator-(const Date& other) const{
+	return (*this).mod_julian_day() - other.mod_julian_day();
 }
 
 
@@ -123,49 +104,15 @@ bool Gregorian::operator>=(const Date& rhs) const{
 }
 
 int Gregorian::mod_julian_day() const{
-	
-	Gregorian start(1858,11,17);
-	int res = 0;
-	int currentYear = year();
 
-	//Fast forward to the correct year
-	while(start.year() < currentYear){
-		if(start.is_leap_year()){
-			res += 366;
-		} else {
-			res += 365;
-		}
-		start.add_year();
-	}
-	//remove one year
-	//start.remove_year();
+	int a = (14-month())/12;
+	int y = year() + 4800 - a;
+	int m = month()+(12*a)-3;
 
-	//Fix the last days (max one year as the worse case)
-	// while(start != (*this)){
-	// 	if(start < (*this)){
-	// 		++start;
-	// 		++res;
-	// 	} else {
-	// 		--start;
-	// 		--res;
-	// 	}
-	//}
-	if(start < (*this)){
-		while(start < (*this)){
-			++start;
-			++res;
-		}
-		;
-	} else {
-		while(start > (*this)){
-			--start;
-			--res;
-		}
-		++res;
-	}
-	return res;
+	int JDN = day() + (((153*m)+2)/5) + 365*y + (y/4)-(y/100)+(y/400)-32045;
+
+	return std::floor(JDN - 2400000.5);
 }
-
 
 int Gregorian::week_day() const{
 	int result;
@@ -230,20 +177,20 @@ int Gregorian::week_day() const{
 
 	int centNumber = cent_nummer_array[centNumberTemp];
 
-	if(centNumberTemp == 1){
-		centNumber = 4;
-	}
-	else if(centNumberTemp == 2){
-		centNumber = 2;
-	}
-	else if(centNumberTemp == 3){
-		centNumber = 0;
-	}
-	else if(centNumberTemp == 0){
-		centNumber = 6;
-	}
+	// if(centNumberTemp == 1){
+	// 	centNumber = 4;
+	// }
+	// else if(centNumberTemp == 2){
+	// 	centNumber = 2;
+	// }
+	// else if(centNumberTemp == 3){
+	// 	centNumber = 0;
+	// }
+	// else if(centNumberTemp == 0){
+	// 	centNumber = 6;
+	// }
 
-	return ((dayNumber + monthNumber + yearNumber + (yearNumber/4) + centNumber)%7);
+	return ((dayNumber + monthNumber + yearNumber + (int)std::floor((double)(yearNumber/4)) + centNumber-1)%7)+1;
 }
 
 std::string Gregorian::week_day_name() const{
@@ -288,6 +235,7 @@ void Gregorian::add_day(int n){
 				if(m == 1){
 					m = 12;
 					--y;
+					d = days_this_month();
 				} else {
 					--m;
 					d = days_this_month();
@@ -358,7 +306,7 @@ void Gregorian::add_month(int n){
 				--y;
 			}
 			if(d > days_this_month()){
-				--m;
+				++m;
 				add_day(-30);
 			}
 		}
