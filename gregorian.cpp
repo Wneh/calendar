@@ -65,9 +65,8 @@ int Gregorian::operator-(const Date& other) const{
 }
 
 
-
-bool Gregorian::operator==(const Date& rhs) const {
- 	return ((y == rhs.year()) && (m == rhs.month()) && (d == rhs.day()));
+bool Gregorian::operator==(const Date& other) const {
+ 	return (*this).mod_julian_day() == other.mod_julian_day();
 }
 
 bool Gregorian::operator!=(const Date& rhs) const{
@@ -177,19 +176,6 @@ int Gregorian::week_day() const{
 
 	int centNumber = cent_nummer_array[centNumberTemp];
 
-	// if(centNumberTemp == 1){
-	// 	centNumber = 4;
-	// }
-	// else if(centNumberTemp == 2){
-	// 	centNumber = 2;
-	// }
-	// else if(centNumberTemp == 3){
-	// 	centNumber = 0;
-	// }
-	// else if(centNumberTemp == 0){
-	// 	centNumber = 6;
-	// }
-
 	return ((dayNumber + monthNumber + yearNumber + (int)std::floor((double)(yearNumber/4)) + centNumber-1)%7)+1;
 }
 
@@ -263,25 +249,8 @@ void Gregorian::remove_day(int n){
 
 //Add a month
 void Gregorian::add_month(){
-	// ++m;
-	// //Check if we're in the last month
-	// if(m == 13){
-	// 	//Increment year
-	// 	add_year();
-	// 	m = 1;
-	// }
-	// if(d > days_this_month()){
-	// 	--m;
-	// 	add_day(30);
-	// }
 	add_month(1);
 }
-
-// void Gregorian::add_month(int n){
-// 	for(int i = 0; i < abs(n); ++i){
-// 		(n > 0) ? add_month() : remove_month();
-// 	}
-// }
 
 void Gregorian::add_month(int n){
 	if(n == 0){
@@ -324,22 +293,10 @@ void Gregorian::remove_month(int n){
 
 //Increment number of years
 void Gregorian::add_year(){
-	//No limit here on number of year #YOLO
-	// ++y;
-	// //Check for leap year
-	// if(m == 2 && d == 29){
-	// 	if(!is_leap_year()){
-	// 		d = 28;
-	// 	}
-	// }
 	add_year(1);
 }
 
 void Gregorian::add_year(int n){
-	// for(int i = 0; i < abs(n); ++i){
-	// 	(n > 0) ? add_year() : remove_year();
-	// }
-
 	y += n;
   	if(m == 2 && d == 29){
     	if(!is_leap_year()){
@@ -350,21 +307,10 @@ void Gregorian::add_year(int n){
 
 //Remove a year;
 void Gregorian::remove_year(){
-	// --y;
-	// //Check for leap year
-	// if(m == 2 && d == 29){
-	// 	if(!is_leap_year()){
-	// 		d = 28;
-	// 	}
-	// }
 	remove_year(1);
 }
 
 void Gregorian::remove_year(int n){
-	// for(int i = 0; i < n; ++i){
-	// 	remove_year();
-	// }
-
 	y-= n;
 	if(m == 2 && d == 29){
     	if(!is_leap_year()){
