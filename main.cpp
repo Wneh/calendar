@@ -18,11 +18,11 @@ int main(){
 	assert(g1.day() == 2);
 
 	//Prefix increment
-	++(g1);
+	++g1;
 	assert(g1.day() == 3);
 
 	//Postfix increment
-	(g1)++;
+	++g1;
 	assert(g1.day() == 4);
 
 	//Leap year?
@@ -85,7 +85,7 @@ int main(){
 	std::cout << g5.mod_julian_day() << " " <<g6.mod_julian_day() << std::endl;
 	std::cout << std::endl;
 
-	assert((g5 - g6) == 4);
+	assert((g5 - g6) == -4);
 	std::cout << g5 << std::endl;
 	std::cout << g6 << std::endl;
 	std::cout << std::endl;

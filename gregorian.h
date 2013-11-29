@@ -5,62 +5,30 @@
 
 namespace lab2{
 
-class Gregorian : public Date{
-public:
+	class Gregorian : public Date{
+	public:
 
-	Gregorian();
-	Gregorian(int new_year, int new_month, int new_day);
-	Gregorian(const Date& other);
-	Date& operator=(const Date& rhs);
+		Gregorian();
+		Gregorian(int new_year, int new_month, int new_day);
+		Gregorian(const Date& other);
 
-	Date& operator++();
-	Date& operator--();
-	Gregorian operator++(int unused);
-	Gregorian operator--(int unused);
-	int operator-(const Date& rhs) const;
+		Date& operator++();
+		Date& operator--();
+		Gregorian operator++(int unused);
+		Gregorian operator--(int unused);
 
-	Date& operator+=(const int& n);
-	Date& operator-=(const int& n);
+		int mod_julian_day() const;	
 
-	//Comparision operators
-	virtual bool operator==(const Date& rhs) const;
-	virtual bool operator!=(const Date& rhs) const;
-	virtual bool operator< (const Date& rhs) const;
-	virtual bool operator> (const Date& rhs) const;
-	virtual bool operator<=(const Date& rhs) const;
-	virtual bool operator>=(const Date& rhs) const;
+		// int week_day() const;
+		// int days_this_month() const;
+		// int months_per_year() const;
+		// std::string week_day_name() const;
+		// std::string month_name() const;
 
-	int mod_julian_day() const;	
+		bool is_leap_year() const;
+	private:
 
-	int week_day() const;
-	int days_this_month() const;
-	int months_per_year() const;
-	std::string week_day_name() const;
-	std::string month_name() const;
-
-	void add_month();
-	void add_month(int n);
-
-	void add_year();
-	void add_year(int n);
-
-	//bool is_leap_year() const;
-
-private:
-	void add_day();
-	void add_day(int n );
-
-	void remove_day();
-	void remove_day(int n);
-
-	void remove_month();
-	void remove_month(int n);
-
-	void remove_year();
-	void remove_year(int n);
-
-};
-
+	};
 }
 
 #endif
