@@ -14,10 +14,10 @@ const int month_nummer_array[13] = {-1,0,3,3,6,1,4,6,2,5,0,3,5};
 Date::Date(){
 	// För att få nuvarande tid
    time_t tp;							//Kommentera denna för kattis
-   // time(&tp); 							//Kommentera denna för kattis
-   // set_k_time(tp);
+   time(&tp); 							//Kommentera denna för kattis
+   set_k_time(tp);
 
-   k_time(&tp); 						//Avkommentera denna för kattis
+   // k_time(&tp); 						//Avkommentera denna för kattis
 
    // För att få ut datum lokalt 
    struct tm* t = gmtime(&tp);

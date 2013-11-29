@@ -53,12 +53,6 @@ public:
 	int days_per_week() const {return 7;}
 	virtual bool is_leap_year() const = 0;
 
-	// virtual int week_day() const = 0;
-	// virtual int days_this_month() const = 0;
-	// virtual int months_per_year() const = 0;
-	// virtual std::string week_day_name() const = 0;
-	// virtual std::string month_name() const = 0;
-
 	void add_month();
 	void add_month(int n);
 

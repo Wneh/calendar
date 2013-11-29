@@ -51,49 +51,6 @@ int Gregorian::mod_julian_day() const{
 	return std::floor(JDN - 2400000.5);
 }
 
-// int Gregorian::week_day() const{
-// 	int result;
-// 	result += 0;
-	
-// 	int dayNumber = day_number_array[d];
-	
-// 	//Month table;
-// 	int monthNumber = month_nummer_array[m];
-// 	//Leap year check
-// 	if(is_leap_year()){
-// 		if(m == 1){
-// 			monthNumber = -1;
-// 		}
-// 		else if(m == 2){
-// 			monthNumber = 2;
-// 		}
-// 	}
-
-// 	int yearNumber = y%100;
-
-// 	int centNumberTemp = (y/100)%4;
-
-// 	int centNumber = cent_nummer_array[centNumberTemp];
-
-// 	return ((dayNumber + monthNumber + yearNumber + (int)std::floor((double)(yearNumber/4)) + centNumber-1)%7)+1;
-// }
-
-// std::string Gregorian::week_day_name() const{
-// 	return day_name_array[week_day()];
-// }
-
-// std::string Gregorian::month_name() const{
-// 	return month_name_array[m];
-// }
-
-// int Gregorian::days_this_month() const{
-// 	return ((m == 2 && is_leap_year()) ? (months_length_array[m]+1) : months_length_array[m]);
-// }
-
-// int Gregorian::months_per_year() const{
-// 	return 12;
-// }
-
 bool Gregorian::is_leap_year() const{
 	if(((y%4 == 0) && (y%100 != 0)) || (y%400 == 0)){
 		return true;
