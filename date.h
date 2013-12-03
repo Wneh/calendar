@@ -61,7 +61,7 @@ public:
 
 	virtual int mod_julian_day() const = 0;
 
-	int week_day() const;
+	virtual int week_day() const;
 	int days_this_month() const;
 	int months_per_year() const;
 	std::string week_day_name() const;
