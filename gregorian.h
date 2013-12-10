@@ -1,5 +1,5 @@
-// #ifndef __GREGORIAN.H__
-// #define __GREGORIAN.H__
+#ifndef GREGORIAN_H
+#define GREGORIAN_H
 
 #include "date.h"
 
@@ -12,6 +12,7 @@ namespace lab2{
 		Gregorian(int new_year, int new_month, int new_day);
 		Gregorian(const Date& other);
 
+		Date& operator=(const Date& rhs);
 		Date& operator++();
 		Date& operator--();
 		Gregorian operator++(int unused);
@@ -24,4 +25,4 @@ namespace lab2{
 	};
 }
 
-// #endif
+#endif

@@ -1,5 +1,5 @@
-#ifndef __DATE.H__
-#define __DATE.H__
+#ifndef DATE_H
+#define DATE_H
 
 #include "kattistime.h"
 #include <string>

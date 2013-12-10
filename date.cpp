@@ -13,11 +13,11 @@ const int month_nummer_array[13] = {-1,0,3,3,6,1,4,6,2,5,0,3,5};
 //Default contructor
 Date::Date(){
 	// För att få nuvarande tid
-   time_t tp;							//Kommentera denna för kattis
+   time_t tp;							
    // time(&tp); 							//Kommentera denna för kattis
-   // set_k_time(tp);
+   // set_k_time(tp);						//Kommentera denna för kattis
 
-   k_time(&tp); 						//Avkommentera denna för kattis
+   k_time(&tp); 							//Avkommentera denna för kattis
 
    // För att få ut datum lokalt 
    struct tm* t = gmtime(&tp);
@@ -31,7 +31,6 @@ Date::Date(const Date& other): y(other.y), m(other.m), d(other.d){}
 //Standard contructor
 Date::Date(int new_year,int new_month,int new_day)
 	:y(new_year),m(new_month),d(new_day){
-
 }
 
 Date& Date::operator=(const Date& other){
@@ -50,20 +49,7 @@ bool Date::operator!=(const Date& rhs) const{
 }
 
 bool Date::operator<(const Date& rhs) const{
-	if(y == rhs.year()){
-		if(m == rhs.month()){
-			if(d < rhs.day()){
-				return true;
-			}
-		}
-		else if(m < rhs.month()){
-			return true;
-		}
-	}
-	else if(y < rhs.year()){
-		return true;
-	}
-	return false;
+	return (*this).mod_julian_day() < rhs.mod_julian_day();
 }
 
 bool Date::operator>(const Date& rhs) const{

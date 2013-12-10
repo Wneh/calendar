@@ -8,7 +8,7 @@ namespace lab2{
 	const int month_nummer_array[13] = {-1,0,3,3,6,1,4,6,2,5,0,3,5};
 
 	Julian::Julian():Date(){
-		*this += ((*this).mod_julian_day_from_greg() - this->mod_julian_day());
+		*this += ((*this).mod_julian_day_from_greg() - (*this).mod_julian_day());
 	}
 
 	Julian::Julian(int new_year,int new_month,int new_day):Date(new_year,new_month,new_day){
@@ -19,7 +19,12 @@ namespace lab2{
 
 	Julian::Julian(const Date& other):Date(other){
 		//Do nothing in here
-		(*this) += (other.mod_julian_day() - (*this).mod_julian_day() );
+		(*this) += (other.mod_julian_day() - (*this).mod_julian_day());
+	}
+
+	Date& Julian::operator=(const Date& other){
+		Date::operator=(other);
+		(*this) += (other.mod_julian_day() - (*this).mod_julian_day());	
 	}
 
 	//++Date

@@ -1,5 +1,5 @@
-// #ifndef __JULIAN.H__
-// #define __JULIAN.H__
+#ifndef JULIAN_H
+#define JULIAN_H
 
 #include "date.h"
 
@@ -11,6 +11,7 @@ namespace lab2{
 		Julian(int new_year, int new_month, int new_day);
 		Julian(const Date& other);
 
+		Date& operator=(const Date& rhs);
 		Date& operator++();
 		Date& operator--();
 		Julian operator++(int unused);
@@ -25,4 +26,4 @@ namespace lab2{
 	};
 }
 
-// #endif
+#endif

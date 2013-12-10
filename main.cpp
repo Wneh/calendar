@@ -1,4 +1,5 @@
 #include "gregorian.h"
+#include "julian.h"
 #include <assert.h>
 
 using namespace lab2;	
@@ -111,6 +112,20 @@ int main(){
 	assert(julian.mod_julian_day() == 53005);
 	assert(jul2.mod_julian_day() == 42157);
 	assert(jul1.mod_julian_day() == 62104);
+
+	Julian jul3(1900,2,29);
+	Gregorian gregoly(jul3);
+	Gregorian grog;
+	grog = jul3;
+
+	std::cout << gregoly << " == " << grog << std::endl;
+
+	Gregorian g; // dagens datum
+	Julian j; // också dagens datum
+	std::cout << "Today it is " << g << " gregorian and " << j << " julian";
+	if (g - j == 0) std::cout << ". It is the same date" << std::endl;
+	g = j;
+	if (g - j == 0) std::cout << "It is still the same date" << std::endl;
 
 	return 0;
 }

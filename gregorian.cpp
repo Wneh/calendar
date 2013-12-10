@@ -11,7 +11,30 @@ Gregorian::Gregorian(int new_year,int new_month,int new_day):Date(new_year,new_m
 }
 
 Gregorian::Gregorian(const Date& other):Date(other){
-	//Do nothing in here
+
+	if(is_leap_year() != (other.year() % 4 == 0)){
+		if(other.month() == 2 && other.day() == 29){
+			// ++(*this);
+			m = 3;
+			d = 1;
+
+		}
+	}
+
+	(*this) += (other.mod_julian_day() - (*this).mod_julian_day());
+}
+
+Date& Gregorian::operator=(const Date& other){
+	Date::operator=(other);
+
+	if(is_leap_year() != (other.year() % 4 == 0)){
+		if(other.month() == 2 && other.day() == 29){
+			m = 3;
+			d = 1;
+		}
+	}
+
+	(*this) += (other.mod_julian_day() - (*this).mod_julian_day());
 }
 
 //++Date
