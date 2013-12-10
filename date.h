@@ -16,7 +16,7 @@ public:
 	Date(int new_year, int new_month, int new_day);
 	Date(const Date& other);
 	//Date(const Date& other);
-	Date& operator=(const Date& rhs);
+	virtual Date& operator=(const Date& rhs);
 
 	/*
  	 * Get functions
