@@ -17,7 +17,6 @@ Gregorian::Gregorian(const Date& other):Date(other){
 			// ++(*this);
 			m = 3;
 			d = 1;
-
 		}
 	}
 
